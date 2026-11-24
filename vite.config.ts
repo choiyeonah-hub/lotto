@@ -1,0 +1,12 @@
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+
+export default defineConfig({
+  plugins: [react()],
+  server: { host: true, proxy: { '/api': 'http://localhost:8787' } },
+  preview: { proxy: { '/api': 'http://localhost:8787' } },
+  build: {
+    chunkSizeWarningLimit: 1600,
+    rollupOptions: { output: { manualChunks: { three: ['three'], r3f: ['@react-three/fiber', '@react-three/drei', '@react-three/postprocessing'] } } },
+  },
+});
